@@ -27,28 +27,29 @@ const Checkout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-6">
-      <h1 className="text-4xl font-extrabold text-red-500 text-center mb-6">
-        Checkout
-      </h1>
+    <div className="min-h-screen bg-gray-100 flex justify-center items-center py-10 px-4">
+      <div className="w-full max-w-3xl bg-white p-6 rounded-xl shadow-lg">
+        {/* Checkout Header */}
+        <h1 className="text-4xl font-extrabold text-red-500 text-center mb-6">
+          Checkout
+        </h1>
 
-      <div className="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-lg">
         {/* Order Summary */}
         <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
         {cartItems.length > 0 ? (
-          <div>
+          <div className="bg-gray-50 p-4 rounded-lg">
             {cartItems.map((item, index) => (
               <div
                 key={index}
                 className="flex justify-between items-center p-2 border-b"
               >
                 <span>{item.name}</span>
-                <span className="font-bold">${item.price.toFixed(2)}</span>
+                <span className="font-bold">₹{item.price.toFixed(2)}</span>
               </div>
             ))}
             <div className="flex justify-between mt-4 text-xl font-bold">
               <span>Total:</span>
-              <span className="text-green-600">${totalAmount.toFixed(2)}</span>
+              <span className="text-green-600">₹{totalAmount.toFixed(2)}</span>
             </div>
           </div>
         ) : (
@@ -90,7 +91,7 @@ const Checkout = () => {
 
         {/* Place Order Button */}
         <button
-          className={`w-full bg-blue-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-600 transition duration-300 mt-4 ${
+          className={`w-full bg-red-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-red-600 transition duration-300 mt-4 ${
             cartItems.length === 0 ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={handlePlaceOrder}

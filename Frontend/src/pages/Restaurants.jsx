@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const restaurants = [
   { id: 1, name: "Spicy Grill", image: "https://source.unsplash.com/600x400/?restaurant,food" },
-  { id: 2, name: "Tandoori House", image: "https://source.unsplash.com/600x400/?indian,restaurant" },
+  { id: 2, name: "Chicken House", image: "https://source.unsplash.com/600x400/?indian,restaurant" },
   { id: 3, name: "Pasta Palace", image: "https://source.unsplash.com/600x400/?pasta,restaurant" },
   { id: 4, name: "Burger Barn", image: "https://source.unsplash.com/600x400/?burger,restaurant" },
 ];
