@@ -1,8 +1,34 @@
 import React, { useState } from "react";
+import { loginUser } from "../api/axiosInstance";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [role, setRole] = useState("user");
+  const [email , setemail] = useState("");
+  const [password, setPassword] = useState("");
+  const [IsLoading, setIsLoading] = useState(false)
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const response = await loginUser();
+
+    try {
+      const userData = await loginUser(email, password);
+
+      if (userData.success) {
+        updateUser(userData);
+        success("Login successful! 🎉");
+        closeModal();
+      } else {
+        error(getErrorMessage(userData));
+      }
+    } catch (err) {
+      error(getErrorMessage(err));
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-red-400 to-pink-500 px-4 sm:px-6 lg:px-8">
@@ -29,11 +55,15 @@ const Login = () => {
         )}
         <input
           type="email"
+          value={email}
+          onChange={(e) => setemail(e.target.value)}
           placeholder="Enter your email"
           className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:outline-none"
         />
         <input
           type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="Enter your password"
           className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:outline-none"
         />
