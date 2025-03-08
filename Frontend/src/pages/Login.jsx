@@ -1,17 +1,20 @@
-import React, { useState } from "react";
-import { loginUser } from "../api/axiosInstance";
+import React, { useState, useContext } from "react";
+import { loginUser, signupUser } from "../api/authUser.js";
+import { useToast } from "../context/ToastContext";
+import UserContext from "../context/UserContext.js";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [role, setRole] = useState("user");
-  const [email , setemail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [IsLoading, setIsLoading] = useState(false)
+  const { updateUser } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const { success, error } = useToast();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const response = await loginUser();
 
     try {
       const userData = await loginUser(email, password);
@@ -19,12 +22,31 @@ const Login = () => {
       if (userData.success) {
         updateUser(userData);
         success("Login successful! 🎉");
-        closeModal();
       } else {
-        error(getErrorMessage(userData));
+        error(userData.message || "Login failed.");
       }
     } catch (err) {
-      error(getErrorMessage(err));
+      error(err.message || "Something went wrong.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const userData = await signupUser({ role, email, password });
+
+      if (userData.success) {
+        success("Signup successful! 🎉 Please login.");
+        setIsLogin(true); // Switch to login after successful signup
+      } else {
+        error(userData.message || "Signup failed.");
+      }
+    } catch (err) {
+      error(err.message || "Something went wrong.");
     } finally {
       setIsLoading(false);
     }
@@ -32,11 +54,12 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-red-400 to-pink-500 px-4 sm:px-6 lg:px-8">
-        <h1 className=" text-6xl text-white absolute top-4">Zomato</h1>
+      <h1 className="text-6xl text-white absolute top-4">Zomato</h1>
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-red-500 mb-6">
           {isLogin ? "Welcome Back!" : "Join Us Today!"}
         </h2>
+
         {!isLogin && (
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -47,16 +70,17 @@ const Login = () => {
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
-              <option value="user">User</option>
-              <option value="delivery">Delivery Partner</option>
-              <option value="restaurant">Restaurant</option>
+              <option value="User">User</option>
+              <option value="Delivery Partner">Delivery Partner</option>
+              <option value="Restaurant">Restaurant</option>
             </select>
           </div>
         )}
+
         <input
           type="email"
           value={email}
-          onChange={(e) => setemail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
           className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:outline-none"
         />
@@ -67,11 +91,17 @@ const Login = () => {
           placeholder="Enter your password"
           className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:outline-none"
         />
-        <button className="w-full bg-red-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-red-600 transition duration-300 ease-in-out transform hover:scale-105">
-          {isLogin ? "Login" : "Signup"}
+
+        <button
+          className="w-full bg-red-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-red-600 transition duration-300 ease-in-out transform hover:scale-105"
+          onClick={isLogin ? handleLogin : handleSignup}
+          disabled={isLoading}
+        >
+          {isLoading ? "Processing..." : isLogin ? "Login" : "Signup"}
         </button>
+
         <p className="text-center mt-4 text-gray-700">
-          {isLogin ? "Don't have an account?" : "Already have an account?"} 
+          {isLogin ? "Don't have an account?" : "Already have an account?"}
           <span
             className="text-red-500 font-semibold cursor-pointer hover:underline"
             onClick={() => setIsLogin(!isLogin)}

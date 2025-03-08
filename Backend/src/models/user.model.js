@@ -101,7 +101,7 @@ import jwt from 'jsonwebtoken';
 const userSchema = new mongoose.Schema({
     role: {
         type: String,
-        enum: ['User', 'Delivery Partner', 'Restaurant', 'Admin'] // Added 'Admin'
+        enum: ['user', 'Delivery Partner', 'Restaurant']
     },
     email: {
         type: String,

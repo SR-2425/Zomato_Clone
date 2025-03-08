@@ -11,7 +11,7 @@ router.route("/register")
     .post(
         [
             body('role')
-                .isIn(['User', 'Delivery Partner', 'Restaurant'])
+                .isIn(['user', 'Delivery Partner', 'Restaurant'])
                 .withMessage('Role must be either User, Delivery Partner, or Restaurant'),
             body('email')
                 .isEmail()
