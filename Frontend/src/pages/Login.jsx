@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { loginUser, signupUser } from "../api/authUser.js";
 import { useToast } from "../context/ToastContext";
 import UserContext from "../context/UserContext.js";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -11,6 +12,8 @@ const Login = () => {
   const { updateUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const { success, error } = useToast();
+  
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,6 +25,7 @@ const Login = () => {
       if (userData.success) {
         updateUser(userData);
         success("Login successful! 🎉");
+        navigate("/"); // Navigate to home page after successful login
       } else {
         error(userData.message || "Login failed.");
       }

@@ -1,11 +1,13 @@
-import express from 'express';
-import { authMiddleware } from '../middlewares/auth.middleware.js';
-import { placeOrder, getUserOrders, updateOrderStatus } from '../controllers/order.controller.js';
+import express from "express";
+import { placeOrder, getOrderHistory } from "../controllers/order.controller.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-router.post('/', authMiddleware, placeOrder);
-router.get('/', authMiddleware, getUserOrders);
-router.put('/:orderId/status', authMiddleware, updateOrderStatus);
+// 📌 Place an Order (Protected Route)
+router.post("/place-order", authMiddleware, placeOrder);
+
+// 📌 Get Order History (Protected Route)
+router.get("/order-history", authMiddleware, getOrderHistory);
 
 export default router;
