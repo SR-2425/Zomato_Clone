@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const orders = [
-  { id: 1, restaurant: "Pizza Palace", items: ["Pepperoni Pizza", "Garlic Bread"], total: "$25.99", status: "Delivered" },
-  { id: 2, restaurant: "Burger Hub", items: ["Cheeseburger", "Fries"], total: "$15.49", status: "Preparing" },
-  { id: 3, restaurant: "Sushi Delight", items: ["Salmon Sushi", "Miso Soup"], total: "$30.99", status: "On the way" },
+  // { id: 1, restaurant: "Pizza Palace", items: ["Pepperoni Pizza", "Garlic Bread"], total: "$25.99", status: "Delivered" },
+  // { id: 2, restaurant: "Burger Hub", items: ["Cheeseburger", "Fries"], total: "$15.49", status: "Preparing" },
+  // { id: 3, restaurant: "Sushi Delight", items: ["Salmon Sushi", "Miso Soup"], total: "$30.99", status: "On the way" },
 ];
 
 const OrderDetails = () => {

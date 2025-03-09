@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import Header from "../pages/Header";
 
 const orders = [
-  { id: 1, restaurant: "Pizza Palace", items: ["Pepperoni Pizza", "Garlic Bread"], total: "₹599" },
-  { id: 2, restaurant: "Burger Hub", items: ["Cheeseburger", "Fries"], total: "₹349" },
-  { id: 3, restaurant: "Sushi Delight", items: ["Salmon Sushi", "Miso Soup"], total: "₹999" },
+  // { id: 1, restaurant: "Pizza Palace", items: ["Pepperoni Pizza", "Garlic Bread"], total: "₹599" },
+  // { id: 2, restaurant: "Burger Hub", items: ["Cheeseburger", "Fries"], total: "₹349" },
+  // { id: 3, restaurant: "Sushi Delight", items: ["Salmon Sushi", "Miso Soup"], total: "₹999" },
 ];
 
 const Orders = () => {
