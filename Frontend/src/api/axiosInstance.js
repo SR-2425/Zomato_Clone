@@ -1,12 +1,11 @@
-import axios from "axios";
-const baseurl = import.meta.env.VITE_BASE_URL;
+import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: baseurl,
-    withCredentials: true,
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
+  baseURL: "https://tomato-gyct.onrender.com",  // ✅ Ensure this is correct
+  withCredentials: true,  // ✅ This applies globally to all requests
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
 
 export default axiosInstance;
