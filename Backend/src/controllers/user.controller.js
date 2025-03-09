@@ -109,7 +109,12 @@ const loginUser = asyncHandler(async (req, res, next) => {
         secure: true
     }
 
-    console.log("About to send response:", JSON.stringify(responseObj));
+    console.log("About to send response:", JSON.stringify({
+        user: LoggedinUser,
+        accessToken,
+        refreshToken
+    }));
+
 
     return res
         .status(200)
