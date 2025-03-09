@@ -15,13 +15,7 @@ const Home = () => {
    const { success, error } = useToast();
 
 
-  // Dummy food items data
-  // const foodItems = [
-  //   { id: 1, name: "Burger", price: 199, image: "https://via.placeholder.com/150" },
-  //   { id: 2, name: "Pizza", price: 299, image: "https://via.placeholder.com/150" },
-  //   { id: 3, name: "Pasta", price: 249, image: "https://via.placeholder.com/150" },
-  //   { id: 4, name: "Fries", price: 149, image: "https://via.placeholder.com/150" },
-  // ];
+
   const foodItems = [
     { id: 1, name: "Burger", price: 129, image: "https://plus.unsplash.com/premium_photo-1684534125661-614f59f16f2e?w=600&auto=format&fit=crop&q=60" },
     { id: 2, name: "Pizza", price: 249, image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop" },
