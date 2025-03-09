@@ -109,6 +109,8 @@ const loginUser = asyncHandler(async (req, res, next) => {
         secure: true
     }
 
+    console.log("About to send response:", JSON.stringify(responseObj));
+
     return res
         .status(200)
         .cookie("accessToken", accessToken, options)
