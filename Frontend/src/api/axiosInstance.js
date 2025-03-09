@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-  baseURL: "http://localhost:4000/api",  // ✅ Updated for local development
+const baseurl = import.meta.env.VITE_BASE_URL;
 
-  withCredentials: true,  // ✅ This applies globally to all requests
+const axiosInstance = axios.create({
+  baseURL: baseurl,  
+  withCredentials: true,  
   headers: {
     "Content-Type": "application/json"
   }
